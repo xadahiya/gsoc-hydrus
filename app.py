@@ -9,6 +9,13 @@ app.config["MONGO_DBNAME"] = "students_db"
 mongo = PyMongo(app, config_prefix='MONGO')
 APP_URL = "http://127.0.0.1:5000"
 
+def set_response_headers(resp, ct = "application/ld+json", status_code = 200):
+    """ Sets the response headers
+        Default : { Content-type:"ld+json", status_code:200}"""
+    resp.status_code = status_code
+    resp.headers['Content-type'] = ct
+    return resp
+
 
 class Student(Resource):
     def get(self, registration=None, department=None):
@@ -18,7 +25,9 @@ class Student(Resource):
             studnet_info = mongo.db.student.find_one(
                 {"registration": registration}, {"_id": 0})
             if studnet_info:
-                return jsonify({"status": "ok", "data": studnet_info})
+                resp = jsonify(studnet_info)
+                resp.status_code = 200
+                return resp
             else:
                 return {"response": "no student found for {}".format(registration)}
 
@@ -41,8 +50,8 @@ class Student(Resource):
                 student['url'] = APP_URL + \
                     url_for('students') + "/" + student.get('registration')
                 data.append(student)
-
-            return jsonify({"response": data})
+            resp = jsonify(data)
+            return set_response_headers(resp)
 
     def post(self):
         data = request.get_json()
