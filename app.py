@@ -8,14 +8,14 @@ from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
 import os
 
-MONGO_URL = os.environ.get('MONGO_URL')
-if not MONGO_URL:
-    MONGO_URL = "mongodb://localhost:27017/hydra";
+# MONGO_URL = os.environ.get('MONGO_URL')
+# if not MONGO_URL:
+    # MONGO_URL = "mongodb://localhost:27017/hydra";
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = MONGO_URL
+# app.config['MONGO_URI'] = MONGO_URL
 
-mongo = PyMongo(app)
+# mongo = PyMongo(app)
 
 
 def set_response_headers(resp, ct="application/json+ld", status_code=200):
