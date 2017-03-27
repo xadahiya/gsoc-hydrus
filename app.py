@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 def set_response_headers(resp, ct="application/json+ld", status_code=200):
     """ Sets the response headers
-        Default : { Content-type:"ld+json", status_code:200}"""
+        Default : { Content-type:"JSON-LD", status_code:200}"""
     resp.status_code = status_code
     resp.headers['Content-type'] = ct
     return resp
