@@ -86,7 +86,7 @@ def gen_initial_context():
 
 
 def gen_vocab():
-    return jsonify({
+    return jsonify(
         {
             "@type": "hydra:ApiDocumentation",
             "hydra:entrypoint": "/",
@@ -120,7 +120,7 @@ def gen_vocab():
                 "_id": "@id"
             }
         }
-    })
+    )
 
 
 class Index(Resource):
@@ -137,7 +137,7 @@ class Vocab(Resource):
 
 api = Api(app)
 api.add_resource(Index, "/", endpoint="index")
-api.add_resource(Vocab, "/vocab#", endpoint="vocab")
+api.add_resource(Vocab, "/vocab", endpoint="vocab")
 # api.add_resource(Student, "/api", endpoint="students")
 # api.add_resource(Student, "/api/<string:registration>",
 #  endpoint="registration")
