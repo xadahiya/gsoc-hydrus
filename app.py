@@ -129,9 +129,15 @@ class Index(Resource):
     def get(self):
         return set_response_headers(gen_initial_context())
 
+class Vocab(Resource):
+    """ A generalized vocab for API""""
+
+    def get(self):
+        return set_response_headers(gen_vocab())
 
 api = Api(app)
 api.add_resource(Index, "/", endpoint="index")
+api.add_resource(Vocab, "/vocab#", endpoint="vocab")
 # api.add_resource(Student, "/api", endpoint="students")
 # api.add_resource(Student, "/api/<string:registration>",
 #  endpoint="registration")
