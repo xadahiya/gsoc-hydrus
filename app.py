@@ -10,7 +10,7 @@ import os
 
 # MONGO_URL = os.environ.get('MONGO_URL')
 # if not MONGO_URL:
-# MONGO_URL = "mongodb://localhost:27017/hydra";
+    # MONGO_URL = "mongodb://localhost:27017/hydra";
 
 app = Flask(__name__)
 # app.config['MONGO_URI'] = MONGO_URL
@@ -28,23 +28,28 @@ def set_response_headers(resp, ct="application/ld+json", status_code=200):
 
 def gen_initial_context():
     return jsonify({
-
+        "@context": {
+            "@vocab": "/vocab#",
+            "pto": "http://www.productontology.org/doc/",
+            "hydra": "http://www.w3.org/ns/hydra/core#",
+            "hydra:property": {"@type": "@vocab"}
+        },
         "@type": "CafeOrCoffeeShop",
-        "_id": "https://polar-peak-76271.herokuapp.com/",
+        "@id": "https://polar-peak-76271.herokuapp.com/",
         "name": "Kaffeehaus Hagen",
         "makesOffer": [
             {
                 "@type": "Offer",
-                "_id": "/offers/1234",
+                "@id": "/offers/1234",
                 "itemOffered": {
                     "@type": "pto:Latte_macchiato",
-                    "_id": "/products/latte-1",
+                    "@id": "/products/latte-1",
                     "productID": "latte-1",
                     "name": "Latte Macchiato",
                     "hydra:collection": [
                         {
                             "@type": "hydra:Collection",
-                            "_id": "/orders",
+                            "@id": "http://example.com/orders",
                             "hydra:manages": {
                                 "hydra:property": "orderedItem",
                                 "hydra:subject": {"@type": "Order"}
@@ -69,20 +74,9 @@ def gen_initial_context():
                 "price": 2.8,
                 "priceCurrency": "EUR"
             }
-        ],
-        "@context": {
-            "@vocab": "/vocab#",
-            "@base": "https://polar-peak-76271.herokuapp.com/",
-            "hydra": "http://www.w3.org/ns/hydra/core#",
-            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-            "createdAt": {
-                "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
-            },
-            "_id": "@id"
-        }
+        ]
     }
     )
-
 
 def gen_vocab():
     return jsonify(
@@ -91,7 +85,7 @@ def gen_vocab():
             "hydra:entrypoint": "https://polar-peak-76271.herokuapp.com/",
             "hydra:supportedClass": [
                 {
-                    "_id": "vocab#Entrypoint",
+                    "@id": "vocab#Entrypoint",
                     "@type": "hydra:Class",
                     "hydra:description": "The main entry point of the API",
                     "hydra:supportedOperation": {
@@ -99,7 +93,7 @@ def gen_vocab():
                         "hydra:description": "The APIs main entry point.",
                         "hydra:method": "GET",
                         "hydra:returns": {
-                            "_id": "vocab#EntryPoint"
+                            "@id": "vocab#EntryPoint"
                         }
                     },
                     "hydra:supportedProperty": [],
@@ -115,10 +109,10 @@ def gen_vocab():
                 "createdAt": {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
                 },
-                "_id": "@id"
             }
         }
     )
+
 
 
 class Index(Resource):
@@ -128,11 +122,10 @@ class Index(Resource):
         return set_response_headers(gen_initial_context())
 
 class Vocab(Resource):
-    """ A generalized vocab for API"""
+    """A general vocab for the API"""
 
     def get(self):
         return set_response_headers(gen_vocab())
-
 api = Api(app)
 api.add_resource(Index, "/", endpoint="index")
 api.add_resource(Vocab, "/vocab", endpoint="vocab")
