@@ -29,7 +29,7 @@ def set_response_headers(resp, ct="application/ld+json", status_code=200):
 def gen_initial_context():
     return jsonify({
         "@context": {
-            "@vocab": "/vocab#",
+            "@vocab": "http://schema.org/",
             "pto": "http://www.productontology.org/doc/",
             "hydra": "http://www.w3.org/ns/hydra/core#",
             "hydra:property": {"@type": "@vocab"}
@@ -101,7 +101,7 @@ def gen_vocab():
                 },
             ],
             "@context": {
-                "@vocab": "/vocab#",
+                "@vocab": "https://polar-peak-76271.herokuapp.com/vocab#",
                 "pto": "http://www.productontology.org/doc/",
                 "hydra": "http://www.w3.org/ns/hydra/core#",
                 "hydra:property": {"@type": "@vocab"}
