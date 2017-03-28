@@ -35,7 +35,7 @@ def gen_initial_context():
             "hydra:property": {"@type": "@vocab"}
         },
         "@type": "CafeOrCoffeeShop",
-        "@id": "/store",
+        "@id": "/",
         "name": "Kaffeehaus Hagen",
         "makesOffer": [
             {
