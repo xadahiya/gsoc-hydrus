@@ -130,7 +130,7 @@ class Index(Resource):
         return set_response_headers(gen_initial_context())
 
 class Vocab(Resource):
-    """ A generalized vocab for API""""
+    """ A generalized vocab for API"""
 
     def get(self):
         return set_response_headers(gen_vocab())
