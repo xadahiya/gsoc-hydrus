@@ -28,54 +28,42 @@ def set_response_headers(resp, ct="application/ld+json", status_code=200):
 
 def gen_initial_context():
     return jsonify({
+        "_id": "./",
+        "@type": "Entrypoint",
+        "store": {
+            "_id": "store"
+        },
+
+        "products": {
+            "@type": "hydra:IriTemplate",
+            "hydra:mapping": {
+                "@type": "hydra:IriTemplateMapping",
+                "hydra:property": {
+                    "@type": "rdfs:Property",
+                    "rdfs:range": {
+                        "_id": "xsd:number"
+                    }
+                },
+                "hydra:required": "true",
+                "hydra:variable": "product_id"
+            },
+            "hydra:template": "/product{?product_id}",
+            "hydra:variableRepresentation": "BasicRepresentation"
+        },
+        "product": {
+            "_id": "product"
+        },
+        "hydra:title": "Main API Entry Point",
         "@context": {
             "@vocab": "https://polar-peak-76271.herokuapp.com/vocab#",
+            "@base": "https://polar-peak-76271.herokuapp.com/",
             "pto": "http://www.productontology.org/doc/",
             "hydra": "http://www.w3.org/ns/hydra/core#",
-            "hydra:property": {"@type": "@vocab"}
-        },
-        "@type": "CafeOrCoffeeShop",
-        "@id": "/",
-        "name": "Kaffeehaus Hagen",
-        "makesOffer": [
-            {
-                "@type": "Offer",
-                "@id": "/offers/1234",
-                "itemOffered": {
-                    "@type": "pto:Latte_macchiato",
-                    "@id": "/products/latte-1",
-                    "productID": "latte-1",
-                    "name": "Latte Macchiato",
-                    "hydra:collection": [
-                        {
-                            "@type": "hydra:Collection",
-                            "@id": "http://example.com/orders",
-                            "hydra:manages": {
-                                "hydra:property": "orderedItem",
-                                "hydra:subject": {"@type": "Order"}
-                            },
-                            "hydra:operation": {
-                                "hydra:method": "POST",
-                                "hydra:expects": {
-                                    "hydra:supportedProperty": [
-                                        {
-                                            "@type": "PropertyValueSpecification",
-                                            "hydra:property": "productID",
-                                            "hydra:required": "true",
-                                            "defaultValue": "latte-1",
-                                            "readOnlyValue": "true"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    ]
-                },
-                "price": 2.8,
-                "priceCurrency": "EUR"
-            }
-        ]
+            "_id": "@id"
+        }
     }
+
+
     )
 
 
@@ -86,7 +74,7 @@ def gen_vocab():
             "hydra:entrypoint": "/",
             "hydra:supportedClass": [
                 {
-                    "@id": "vocab#Entrypoint",
+                    "_id": "vocab#Entrypoint",
                     "@type": "hydra:Class",
                     "hydra:description": "The main entry point of the API",
                     "hydra:supportedOperation": {
@@ -94,19 +82,95 @@ def gen_vocab():
                         "hydra:description": "The APIs main entry point.",
                         "hydra:method": "GET",
                         "hydra:returns": {
-                            "@id": "vocab#EntryPoint"
+                            "_id": "vocab#EntryPoint"
                         }
                     },
+                    "hydra:supportedProperty": [
+                        {
+                            "_id": "vocab#get-store-link",
+                            "@type": "hydra:SupportedProperty",
+                            "hydra:property": {
+                                "_id": "vocab#store",
+                                "@type": "hydra:Link",
+                                "rdfs:comment": "Redirects the user to the store",
+                                "hydra:supportedOperation": {
+                                    "@type": "hydra:Operation",
+                                    "hydra:method": "GET",
+                                }
+                            }
+                        },
+                        {
+                            "_id": "vocab#search-product",
+                            "@type": "hydra:SupportedProperty",
+                            "hydra:property": {
+                                "_id": "vocab#offer",
+                                "@type": "hydra:TemplatedLink",
+                                "rdfs:comment": "Search product by product_id",
+                                "hydra:supportedOperation": {
+                                    "@type": "hydra:Operation",
+                                    "hydra:method": "GET",
+                                    "hydra:returns": {
+                                        "_id": "vocab#product"
+                                    }
+                                }
+                            }
+                        }
+                    ],
                     "hydra:title": "EntryPoint"
+                },
+
+                {
+                    "_id": "vocab#products",
+                    "@type": "hydra:Class",
+                    "hydra:description": "A product represents a servable item like coffee or something from the store",
+                    "hydra:supportedOperation": [
+                        {
+                            "_id": "vocab#product_retrieve",
+                            "@type": "hydra:Operation",
+                            "hydra:description": "Retrieves a product",
+                            "hydra:method": "GET",
+                            "hydra:returns": {
+                                "_id": "vocab#product"
+                            }
+                        }
+                    ],
+                    "hydra:supportedProperty": [
+                        {
+                            "@type": "hydra:SupportedProperty",
+                            "hydra:property": {
+                                "_id": "vocab#name",
+                                "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                                "rdfs:comment": "The products's name",
+                                "hydra:supportedOperation": [
+                                ]
+                            }
+                        },
+                        {
+                            "@type": "hydra:SupportedProperty",
+                            "hydra:property": {
+                                "_id": "vocab#price",
+                                "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                                "rdfs:comment": "The product's price",
+                                "hydra:supportedOperation": [
+                                ]
+                            },
+                            "hydra:required": "true"
+                        },
+
+                    ],
+                    "hydra:title": "Product"
                 },
             ],
             "@context": {
                 "@vocab": "https://polar-peak-76271.herokuapp.com/vocab#",
+                "@base": "https://polar-peak-76271.herokuapp.com/",
                 "pto": "http://www.productontology.org/doc/",
                 "hydra": "http://www.w3.org/ns/hydra/core#",
-                "hydra:property": {"@type": "@vocab"}
+                "_id": "@id"
             }
         }
+
+
     )
 
 
