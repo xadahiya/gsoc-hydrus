@@ -30,7 +30,7 @@ def gen_initial_context():
     return jsonify({
 
         "@type": "CafeOrCoffeeShop",
-        "_id": "/",
+        "_id": "https://polar-peak-76271.herokuapp.com/",
         "name": "Kaffeehaus Hagen",
         "makesOffer": [
             {
@@ -72,10 +72,9 @@ def gen_initial_context():
         ],
         "@context": {
             "@vocab": "/vocab#",
-            "@base": "/",
+            "@base": "https://polar-peak-76271.herokuapp.com/",
             "hydra": "http://www.w3.org/ns/hydra/core#",
             "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-            "xsd": "http://www.w3.org/2001/XMLSchema#",
             "createdAt": {
                 "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
             },
@@ -89,7 +88,7 @@ def gen_vocab():
     return jsonify(
         {
             "@type": "hydra:ApiDocumentation",
-            "hydra:entrypoint": "/",
+            "hydra:entrypoint": "https://polar-peak-76271.herokuapp.com/",
             "hydra:supportedClass": [
                 {
                     "_id": "vocab#Entrypoint",
@@ -110,10 +109,9 @@ def gen_vocab():
             "lvz:entrypointClass": "/vocab#EntryPoint",
             "@context": {
                 "@vocab": "/vocab#",
-                "@base": "/",
+                "@base": "https://polar-peak-76271.herokuapp.com/",
                 "hydra": "http://www.w3.org/ns/hydra/core#",
                 "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-                "xsd": "http://www.w3.org/2001/XMLSchema#",
                 "createdAt": {
                     "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
                 },
