@@ -28,7 +28,7 @@ def set_response_headers(resp, ct="application/ld+json", status_code=200):
 
 def gen_initial_context():
     return jsonify({
-        "_id": "./",
+        "_id": "/",
         "@type": "Entrypoint",
         "store": {
             "_id": "store"
@@ -74,7 +74,7 @@ def gen_vocab():
             "hydra:entrypoint": "/",
             "hydra:supportedClass": [
                 {
-                    "_id": "vocab#Entrypoint",
+                    "_id": "vocab:Entrypoint",
                     "@type": "hydra:Class",
                     "hydra:description": "The main entry point of the API",
                     "hydra:supportedOperation": {
@@ -82,15 +82,15 @@ def gen_vocab():
                         "hydra:description": "The APIs main entry point.",
                         "hydra:method": "GET",
                         "hydra:returns": {
-                            "_id": "vocab#EntryPoint"
+                            "_id": "vocab:EntryPoint"
                         }
                     },
                     "hydra:supportedProperty": [
                         {
-                            "_id": "vocab#get-store-link",
+                            "_id": "vocab:get-store-link",
                             "@type": "hydra:SupportedProperty",
                             "hydra:property": {
-                                "_id": "vocab#store",
+                                "_id": "vocab:store",
                                 "@type": "hydra:Link",
                                 "rdfs:comment": "Redirects the user to the store",
                                 "hydra:supportedOperation": {
@@ -100,17 +100,17 @@ def gen_vocab():
                             }
                         },
                         {
-                            "_id": "vocab#search-product",
+                            "_id": "vocab:search-product",
                             "@type": "hydra:SupportedProperty",
                             "hydra:property": {
-                                "_id": "vocab#offer",
+                                "_id": "vocab:offer",
                                 "@type": "hydra:TemplatedLink",
                                 "rdfs:comment": "Search product by product_id",
                                 "hydra:supportedOperation": {
                                     "@type": "hydra:Operation",
                                     "hydra:method": "GET",
                                     "hydra:returns": {
-                                        "_id": "vocab#product"
+                                        "_id": "vocab:product"
                                     }
                                 }
                             }
@@ -120,17 +120,17 @@ def gen_vocab():
                 },
 
                 {
-                    "_id": "vocab#products",
+                    "_id": "vocab:products",
                     "@type": "hydra:Class",
                     "hydra:description": "A product represents a servable item like coffee or something from the store",
                     "hydra:supportedOperation": [
                         {
-                            "_id": "vocab#product_retrieve",
+                            "_id": "vocab:product_retrieve",
                             "@type": "hydra:Operation",
                             "hydra:description": "Retrieves a product",
                             "hydra:method": "GET",
                             "hydra:returns": {
-                                "_id": "vocab#product"
+                                "_id": "vocab:product"
                             }
                         }
                     ],
@@ -138,7 +138,7 @@ def gen_vocab():
                         {
                             "@type": "hydra:SupportedProperty",
                             "hydra:property": {
-                                "_id": "vocab#name",
+                                "_id": "vocab:name",
                                 "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                                 "rdfs:comment": "The products's name",
                                 "hydra:supportedOperation": [
@@ -148,7 +148,7 @@ def gen_vocab():
                         {
                             "@type": "hydra:SupportedProperty",
                             "hydra:property": {
-                                "_id": "vocab#price",
+                                "_id": "vocab:price",
                                 "@type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                                 "rdfs:comment": "The product's price",
                                 "hydra:supportedOperation": [
