@@ -78,6 +78,41 @@ def gen_initial_context():
     }
     )
 
+def gen_vocab():
+    return jsonify(
+        {
+            "@type": "hydra:ApiDocumentation",
+            "hydra:entrypoint": "https://polar-peak-76271.herokuapp.com/",
+            "hydra:supportedClass": [
+                {
+                    "@id": "vocab#Entrypoint",
+                    "@type": "hydra:Class",
+                    "hydra:description": "The main entry point of the API",
+                    "hydra:supportedOperation": {
+                        "@type": "hydra:Operation",
+                        "hydra:description": "The APIs main entry point.",
+                        "hydra:method": "GET",
+                        "hydra:returns": {
+                            "@id": "vocab#EntryPoint"
+                        }
+                    },
+                    "hydra:supportedProperty": [],
+                    "hydra:title": "EntryPoint"
+                },
+            ],
+            "lvz:entrypointClass": "/vocab#EntryPoint",
+            "@context": {
+                "@vocab": "/vocab#",
+                "@base": "https://polar-peak-76271.herokuapp.com/",
+                "hydra": "http://www.w3.org/ns/hydra/core#",
+                "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+                "createdAt": {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+                },
+            }
+        }
+)
+
 
 class Index(Resource):
     """A link to main entry point of the Web API"""
@@ -85,9 +120,15 @@ class Index(Resource):
     def get(self):
         return set_response_headers(gen_initial_context())
 
+class Vocab(Resource):
+    """A general vocab for the API"""
+
+    def get(self):
+        return set_response_headers(gen_vocab())
 
 api = Api(app)
 api.add_resource(Index, "/", endpoint="index")
+api.add_resource(Vocab, "/vocab", endpoint="vocab")
 # api.add_resource(Student, "/api", endpoint="students")
 # api.add_resource(Student, "/api/<string:registration>",
 #  endpoint="registration")
