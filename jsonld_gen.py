@@ -15,7 +15,7 @@ def gen_vocab():
     return jsonify(
         {
             "@context": {
-                "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
+                "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab",
                 "hydra": "http://www.w3.org/ns/hydra/core#",
                 "ApiDocumentation": "hydra:ApiDocumentation",
                 "property": {

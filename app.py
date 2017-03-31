@@ -133,7 +133,7 @@ class ProductContext(Resource):
 
 
 api = Api(app)
-api.add_resource(Index, "/coffeeshop-api/", endpoint="coffeeshop-api")
+api.add_resource(Index, "/coffeeshop-api", endpoint="coffeeshop-api")
 api.add_resource(Vocab, "/coffeeshop-api/vocab", endpoint="vocab")
 api.add_resource(Products, "/coffeeshop-api/products", endpoint="products")
 api.add_resource(
