@@ -62,7 +62,7 @@ def gen_vocab():
                     "@id": "http://www.w3.org/ns/hydra/core#Collection",
                     "@type": "hydra:Class",
                     "hydra:title": "Collection",
-                    "hydra:description": None,
+                    "hydra:description": "null",
                     "supportedOperation": [
                     ],
                     "supportedProperty": [
@@ -70,9 +70,9 @@ def gen_vocab():
                             "property": "http://www.w3.org/ns/hydra/core#member",
                             "hydra:title": "members",
                             "hydra:description": "The members of this collection.",
-                            "required": None,
-                            "readonly": False,
-                            "writeonly": False
+                            "required": "null",
+                            "readonly": "false",
+                            "writeonly": "false"
                         }
                     ]
                 },
@@ -80,7 +80,7 @@ def gen_vocab():
                     "@id": "http://www.w3.org/ns/hydra/core#Resource",
                     "@type": "hydra:Class",
                     "hydra:title": "Resource",
-                    "hydra:description": None,
+                    "hydra:description": "null",
                     "supportedOperation": [
                     ],
                     "supportedProperty": [
@@ -90,14 +90,14 @@ def gen_vocab():
                     "@id": "http://schema.org/Product",
                     "@type": "hydra:Class",
                     "hydra:title": "Product",
-                    "hydra:description": None,
+                    "hydra:description": "null",
                     "supportedOperation": [
                         {
                             "@id": "_:product_replace",
                             "@type": "http://schema.org/UpdateAction",
                             "method": "PUT",
                             "label": "Replaces an existing Product entity",
-                            "description": None,
+                            "description": "null",
                             "expects": "http://schema.org/Product",
                             "returns": "http://schema.org/Product",
                             "statusCodes": [
@@ -112,8 +112,8 @@ def gen_vocab():
                             "@type": "http://schema.org/DeleteAction",
                             "method": "DELETE",
                             "label": "Deletes a Product entity",
-                            "description": None,
-                            "expects": None,
+                            "description": "null",
+                            "expects": "null",
                             "returns": "http://www.w3.org/2002/07/owl#Nothing",
                             "statusCodes": [
                             ]
@@ -123,8 +123,8 @@ def gen_vocab():
                             "@type": "hydra:Operation",
                             "method": "GET",
                             "label": "Retrieves a Product entity",
-                            "description": None,
-                            "expects": None,
+                            "description": "null",
+                            "expects": "null",
                             "returns": "http://schema.org/Product",
                             "statusCodes": [
                             ]
@@ -135,24 +135,24 @@ def gen_vocab():
                             "property": "http://schema.org/name",
                             "hydra:title": "name",
                             "hydra:description": "The product's name",
-                            "required": True,
-                            "readonly": False,
-                            "writeonly": False
+                            "required": "true",
+                            "readonly": "false",
+                            "writeonly": "false"
                         },
                         {
                             "property": "http://schema.org/description",
                             "hydra:title": "description",
                             "hydra:description": "Description of the product",
-                            "required": True,
-                            "readonly": False,
-                            "writeonly": False
+                            "required": "true",
+                            "readonly": "false",
+                            "writeonly": "false"
                         },
                     ]
                 },
                 {
                     "@id": "vocab:EntryPoint",
                     "@type": "hydra:Class",
-                    "subClassOf": None,
+                    "subClassOf": "null",
                     "label": "EntryPoint",
                     "description": "The main entry point or homepage of the API.",
                     "supportedOperation": [
@@ -161,8 +161,8 @@ def gen_vocab():
                             "@type": "hydra:Operation",
                             "method": "GET",
                             "label": "The APIs main entry point.",
-                            "description": None,
-                            "expects": None,
+                            "description": "null",
+                            "expects": "null",
                             "returns": "vocab:EntryPoint",
                             "statusCodes": [
                             ]
@@ -183,8 +183,8 @@ def gen_vocab():
                                         "@type": "hydra:Operation",
                                         "method": "GET",
                                         "label": "Retrieves all Product entities",
-                                        "description": None,
-                                        "expects": None,
+                                        "description": "null",
+                                        "expects": "null",
                                         "returns": "vocab:ProductCollection",
                                         "statusCodes": [
                                         ]
@@ -193,9 +193,9 @@ def gen_vocab():
                             },
                             "hydra:title": "products",
                             "hydra:description": "The products collection",
-                            "required": None,
-                            "readonly": True,
-                            "writeonly": False
+                            "required": "null",
+                            "readonly": "true",
+                            "writeonly": "false"
                         }
                     ]
                 },
@@ -211,7 +211,7 @@ def gen_vocab():
                             "@type": "http://schema.org/AddAction",
                             "method": "POST",
                             "label": "Creates a new Product entity",
-                            "description": None,
+                            "description": "null",
                             "expects": "https://schema.org/Product",
                             "returns": "https://schema.org/Product",
                             "statusCodes": [
@@ -226,8 +226,8 @@ def gen_vocab():
                             "@type": "hydra:Operation",
                             "method": "GET",
                             "label": "Retrieves all Product entities",
-                            "description": None,
-                            "expects": None,
+                            "description": "null",
+                            "expects": "null",
                             "returns": "vocab:ProductCollection",
                             "statusCodes": [
                             ]
@@ -238,9 +238,9 @@ def gen_vocab():
                             "property": "http://www.w3.org/ns/hydra/core#member",
                             "hydra:title": "members",
                             "hydra:description": "The products",
-                            "required": None,
-                            "readonly": False,
-                            "writeonly": False
+                            "required": "null",
+                            "readonly": "false",
+                            "writeonly": "false"
                         }
                     ]
                 }
