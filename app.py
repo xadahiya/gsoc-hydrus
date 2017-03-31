@@ -98,7 +98,7 @@ class Products(Resource):
     """All operations related to Products Collection"""
 
     def get(self):
-        return set_response_headers(gen_products)
+        return set_response_headers(gen_products())
 
 
 class Product(Resource):
