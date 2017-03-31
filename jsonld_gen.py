@@ -1,3 +1,4 @@
+from flask import jsonify
 ## Json-ld data generators
 def gen_entrypoint():
     return jsonify({
