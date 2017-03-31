@@ -4,10 +4,10 @@ from flask import jsonify
 
 def gen_entrypoint():
     return jsonify({
-        "@context": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/contexts/EntryPoint.jsonld",
-        "@id": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/",
+        "@context": "/coffeeshop-api/contexts/EntryPoint.jsonld",
+        "@id": "/coffeeshop-api/",
         "@type": "EntryPoint",
-        "products": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/products/"
+        "products": "/coffeeshop-api/products"
     })
 
 

@@ -44,7 +44,7 @@ def gen_dummy_product():
 def gen_products():
     return jsonify({
         "@context": "/coffeeshop-api/contexts/ProductCollection.jsonld",
-        "@id": "/coffeeshop-api/products/",
+        "@id": "/coffeeshop-api/products",
         "@type": "ProductCollection",
         "members": [
             {
