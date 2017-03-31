@@ -31,7 +31,7 @@ def gen_entrypoint_context():
     {
   "@context": {
     "hydra": "http://www.w3.org/ns/hydra/core#",
-    "vocab": "http://127.0.0.1:5000/coffeeshop-api/vocab#",
+    "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
     "EntryPoint": "vocab:EntryPoint",
     "products": {
       "@id": "vocab:EntryPoint/products",
@@ -47,7 +47,7 @@ def gen_product_collection_context():
     {
   "@context": {
     "hydra": "http://www.w3.org/ns/hydra/core#",
-    "vocab": "http://127.0.0.1:5000/coffeeshop-api/vocab#",
+    "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
     "EventCollection": "vocab:ProductCollection",
     "members": "http://www.w3.org/ns/hydra/core#member"
   }
@@ -58,7 +58,7 @@ def gen_product_context():
     return jsonify({
   "@context": {
     "hydra": "http://www.w3.org/ns/hydra/core#",
-    "vocab": "http://127.0.0.1:5000/coffeeshop-api/vocab#",
+    "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
     "Event": "http://schema.org/Product",
     "name": "http://schema.org/name",
     "description": "http://schema.org/description",
@@ -69,10 +69,10 @@ def gen_product_context():
 
 def gen_entrypoint():
     return jsonify({
-  "@context": "http://127.0.0.1:5000/coffeeshop-api/contexts/EntryPoint.jsonld",
-  "@id": "http://127.0.0.1:5000/coffeeshop-api/",
+  "@context": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/contexts/EntryPoint.jsonld",
+  "@id": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/",
   "@type": "EntryPoint",
-  # "products": "http://127.0.0.1:5000/coffeeshop-api/products/"
+  # "products": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/products/"
     })
 
 
@@ -80,7 +80,7 @@ def gen_vocab():
     return jsonify(
     {
   "@context": {
-    "vocab": "http://127.0.0.1:5000/coffeeshop-api/vocab#",
+    "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
     "hydra": "http://www.w3.org/ns/hydra/core#",
     "ApiDocumentation": "hydra:ApiDocumentation",
     "property": {
@@ -120,7 +120,7 @@ def gen_vocab():
       "@type": "@id"
     }
   },
-  "@id": "http://127.0.0.1:5000/coffeeshop-api/vocab",
+  "@id": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab",
   "@type": "ApiDocumentation",
   "supportedClass": [
     {
@@ -392,7 +392,7 @@ class ProductContext(Resource):
 
 
 api = Api(app)
-api.add_resource(Index, "/coffeeshop-api/", endpoint="index")
+api.add_resource(Index, "/coffeeshop-api/", endpoint="coffeeshop-api")
 api.add_resource(Vocab, "/coffeeshop-api/vocab", endpoint="vocab")
 api.add_resource(EntryPointContext, "/coffeeshop-api/contexts/EntryPoint.jsonld", endpoint="entry_point_context")
 api.add_resource(ProductCollectionContext, "/coffeeshop-api/contexts/ProductCollection.jsonld", endpoint="product_collection_context")
