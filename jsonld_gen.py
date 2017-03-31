@@ -15,7 +15,7 @@ def gen_vocab():
     return jsonify(
         {
             "@context": {
-                "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab",
+                "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
                 "hydra": "http://www.w3.org/ns/hydra/core#",
                 "ApiDocumentation": "hydra:ApiDocumentation",
                 "property": {
@@ -55,7 +55,7 @@ def gen_vocab():
                     "@type": "@id"
                 }
             },
-            "@id": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab",
+            "@id": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab#",
             "@type": "ApiDocumentation",
             "supportedClass": [
                 {
@@ -150,7 +150,7 @@ def gen_vocab():
                     ]
                 },
                 {
-                    "@id": "vocab:EntryPoint",
+                    "@id": "vocab#EntryPoint",
                     "@type": "hydra:Class",
                     "subClassOf": "null",
                     "label": "EntryPoint",
@@ -163,7 +163,7 @@ def gen_vocab():
                             "label": "The APIs main entry point.",
                             "description": "null",
                             "expects": "null",
-                            "returns": "vocab:EntryPoint",
+                            "returns": "vocab#EntryPoint",
                             "statusCodes": [
                             ]
                         }
@@ -171,12 +171,12 @@ def gen_vocab():
                     "supportedProperty": [
                         {
                             "property": {
-                                "@id": "vocab:EntryPoint/products",
+                                "@id": "vocab#EntryPoint/products",
                                 "@type": "hydra:Link",
                                 "label": "products",
                                 "description": "The products collection",
-                                "domain": "vocab:EntryPoint",
-                                "range": "vocab:ProductCollection",
+                                "domain": "vocab#EntryPoint",
+                                "range": "vocab#ProductCollection",
                                 "supportedOperation": [
                                     {
                                         "@id": "_:product_collection_retrieve",
@@ -185,7 +185,7 @@ def gen_vocab():
                                         "label": "Retrieves all Product entities",
                                         "description": "null",
                                         "expects": "null",
-                                        "returns": "vocab:ProductCollection",
+                                        "returns": "vocab#ProductCollection",
                                         "statusCodes": [
                                         ]
                                     }
@@ -200,7 +200,7 @@ def gen_vocab():
                     ]
                 },
                 {
-                    "@id": "vocab:ProductCollection",
+                    "@id": "vocab#ProductCollection",
                     "@type": "hydra:Class",
                     "subClassOf": "http://www.w3.org/ns/hydra/core#Collection",
                     "label": "ProductCollection",
@@ -228,7 +228,7 @@ def gen_vocab():
                             "label": "Retrieves all Product entities",
                             "description": "null",
                             "expects": "null",
-                            "returns": "vocab:ProductCollection",
+                            "returns": "vocab#ProductCollection",
                             "statusCodes": [
                             ]
                         }
