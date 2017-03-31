@@ -11,7 +11,7 @@ import os
 
 # MONGO_URL = os.environ.get('MONGO_URL')
 # if not MONGO_URL:
-    # MONGO_URL = "mongodb://localhost:27017/hydra";
+# MONGO_URL = "mongodb://localhost:27017/hydra";
 
 app = Flask(__name__)
 # app.config['MONGO_URI'] = MONGO_URL
@@ -26,44 +26,58 @@ def set_response_headers(resp, ct="application/ld+json", status_code=200):
     resp.headers['Content-type'] = ct
     return resp
 
-##For now I am using dummy data, later on we can switch to dynamic data
+
+def gen_dummy_product():
+    return jsonify(
+        {
+            "@context": "/coffeeshop-api/contexts/Product.jsonld",
+            "@id": "/coffeeshop-api/products/*",
+            "@type": "Product",
+            "name": "Coffee",
+            "description": "This is Coffee, it tastes good",
+        }
+
+    )
+# For now I am using dummy data, later on we can switch to dynamic data
+
+
 def gen_products():
     return jsonify({
-  "@context": "/coffeeshop-api/contexts/ProductCollection.jsonld",
-  "@id": "/coffeeshop-api/products/",
-  "@type": "ProductCollection",
-  "members": [
-    {
-      "@id": "/coffeeshop-api/products/80",
-      "@type": "http://schema.org/Product"
-    },
-    {
-      "@id": "/coffeeshop-api/products/81",
-      "@type": "http://schema.org/Product"
-    },
-    {
-      "@id": "/coffeeshop-api/products/83",
-      "@type": "http://schema.org/Product"
-    },
-    {
-      "@id": "/coffeeshop-api/products/84",
-      "@type": "http://schema.org/Product"
-    },
-    {
-      "@id": "/coffeeshop-api/products/85",
-      "@type": "http://schema.org/Products"
-    },
-    {
-      "@id": "/coffeeshop-api/products/86",
-      "@type": "http://schema.org/Product"
-    },
-    {
-      "@id": "/coffeeshop-api/products/87",
-      "@type": "http://schema.org/Product"
+        "@context": "/coffeeshop-api/contexts/ProductCollection.jsonld",
+        "@id": "/coffeeshop-api/products/",
+        "@type": "ProductCollection",
+        "members": [
+            {
+                "@id": "/coffeeshop-api/products/80",
+                "@type": "http://schema.org/Product"
+            },
+            {
+                "@id": "/coffeeshop-api/products/81",
+                "@type": "http://schema.org/Product"
+            },
+            {
+                "@id": "/coffeeshop-api/products/83",
+                "@type": "http://schema.org/Product"
+            },
+            {
+                "@id": "/coffeeshop-api/products/84",
+                "@type": "http://schema.org/Product"
+            },
+            {
+                "@id": "/coffeeshop-api/products/85",
+                "@type": "http://schema.org/Products"
+            },
+            {
+                "@id": "/coffeeshop-api/products/86",
+                "@type": "http://schema.org/Product"
+            },
+            {
+                "@id": "/coffeeshop-api/products/87",
+                "@type": "http://schema.org/Product"
+            }
+        ]
     }
-  ]
-}
-)
+    )
 
 
 class Index(Resource):
@@ -79,14 +93,23 @@ class Vocab(Resource):
     def get(self):
         return set_response_headers(gen_vocab())
 
-class Product(Resource):
-    """All operations related to products"""
+
+class Products(Resource):
+    """All operations related to Products Collection"""
 
     def get(self):
         return set_response_headers(gen_products)
 
+
+class Product(Resource):
+    """All operations related to Product"""
+
+    def get(self, product_id):
+        return set_response_headers(gen_dummy_product())
+
     def post(self):
         pass
+
 
 class EntryPointContext(Resource):
     """Handles entrpoint contexts"""
@@ -94,11 +117,13 @@ class EntryPointContext(Resource):
     def get(self):
         return set_response_headers(gen_entrypoint_context())
 
+
 class ProductCollectionContext(Resource):
     """Handles Product collection Contexts"""
 
     def get(self):
         return set_response_headers(gen_product_collection_context())
+
 
 class ProductContext(Resource):
     """ Handles Product contexts"""
@@ -110,9 +135,15 @@ class ProductContext(Resource):
 api = Api(app)
 api.add_resource(Index, "/coffeeshop-api/", endpoint="coffeeshop-api")
 api.add_resource(Vocab, "/coffeeshop-api/vocab", endpoint="vocab")
-api.add_resource(EntryPointContext, "/coffeeshop-api/contexts/EntryPoint.jsonld", endpoint="entry_point_context")
-api.add_resource(ProductCollectionContext, "/coffeeshop-api/contexts/ProductCollection.jsonld", endpoint="product_collection_context")
-api.add_resource(ProductContext, "/coffeeshop-api/contexts/Product.jsonld", endpoint="product_context")
+api.add_resource(Products, "/coffeeshop-api/products", endpoint="products")
+api.add_resource(
+    Product, "/coffeeshop-api/products/<string:product_id>", endpoint="product")
+api.add_resource(EntryPointContext, "/coffeeshop-api/contexts/EntryPoint.jsonld",
+                 endpoint="entry_point_context")
+api.add_resource(ProductCollectionContext, "/coffeeshop-api/contexts/ProductCollection.jsonld",
+                 endpoint="product_collection_context")
+api.add_resource(
+    ProductContext, "/coffeeshop-api/contexts/Product.jsonld", endpoint="product_context")
 # api.add_resource(Student, "/api", endpoint="students")
 # api.add_resource(Student, "/api/<string:registration>",
 #  endpoint="registration")
