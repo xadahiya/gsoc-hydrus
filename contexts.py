@@ -8,9 +8,9 @@ def gen_entrypoint_context():
             "@context": {
                 "hydra": "http://www.w3.org/ns/hydra/core#",
                 "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab",
-                "EntryPoint": "vocab#EntryPoint",
+                "EntryPoint": "vocab:EntryPoint",
                 "products": {
-                    "@id": "vocab#EntryPoint/products",
+                    "@id": "vocab:EntryPoint/products",
                     "@type": "@id"
                 }
             }
@@ -24,7 +24,7 @@ def gen_product_collection_context():
         "@context": {
             "hydra": "http://www.w3.org/ns/hydra/core#",
             "vocab": "https://polar-peak-76271.herokuapp.com/coffeeshop-api/vocab",
-            "ProductCollection": "vocab#ProductCollection",
+            "ProductCollection": "vocab:ProductCollection",
             "members": "http://www.w3.org/ns/hydra/core#member"
         }
     })
